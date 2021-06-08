@@ -15,7 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ftech-depth: 0
+          fetch-depth: 0
+          
+      - name: Run Docker Command
+        run: docker run --rm -v "$(pwd):/repo" service-name-gitVersion /repo
           
       - name: Assign variables
         run: |
