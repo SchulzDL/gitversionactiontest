@@ -23,4 +23,5 @@ jobs:
           
       - name: Assign variables
         run: |
-          cat 'gitversion.properties'
+          ls -a
+          cat "$(pwd)gitversion.properties"
