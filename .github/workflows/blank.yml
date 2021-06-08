@@ -10,10 +10,13 @@ jobs:
     services:
       service-name-gitVersion:
         image: gittools/gitversion:5.6.11-alpine.3.12-x64-3.1
-        volumes: 
-          - "./:/repo"
       
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ftech-depth: 0
+          
       - name: Assign variables
         run: |
           echo "${{ steps.gitversion.outputs.semVer }}"
