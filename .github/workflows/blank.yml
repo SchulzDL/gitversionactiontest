@@ -10,11 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Get Git Version
-      uses: docker://gittools/gitversion:5.0.2-beta1-27-linux-centos-7-netcoreapp2.2
+      uses: docker://gittools/gitversion:5.6.11-alpine.3.12-x64-3.1
       with:
         args: /github/workspace /nofetch "echo $GitVersion_FullSemVer > /github/workspace/version.txt"
           
     - name: Assign variables
       run: |
-        ls -a /github/workspace
-        cat "/github/workspace/version.txt"
+        ls -a /home/runner/work/AWSSamExample/AWSSamExample
+        echo $(cat /home/runner/work/AWSSamExample/AWSSamExample/version.txt)
