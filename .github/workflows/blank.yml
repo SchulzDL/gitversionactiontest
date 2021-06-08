@@ -16,5 +16,5 @@ jobs:
           
     - name: Assign variables
       run: |
-        ls -a /home/runner
+        ls -a /home/runner/work
         echo $(cat /home/runner/work/AWSSamExample/AWSSamExample/version.txt)
