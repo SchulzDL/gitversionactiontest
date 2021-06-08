@@ -23,4 +23,4 @@ jobs:
           
       - name: Assign variables
         run: |
-          echo "${{ steps.git_version.outputs.* }}"
+          echo "${{ steps.git_version.outputs[0].* }}"
