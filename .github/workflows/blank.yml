@@ -22,5 +22,7 @@ jobs:
         id: git_version
           
       - name: Assign variables
+        env: 
+          VERSION: "${{ join(steps.git_version.outputs.*, '\n') }}"
         run: |
-          echo "${{ steps.git_version.outputs[0].* }}"
+          echo "${VERSION}"
