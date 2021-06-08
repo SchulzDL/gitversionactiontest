@@ -25,4 +25,4 @@ jobs:
         env: 
           VERSION: "${{ join(steps.git_version.outputs.*, '\n') }}"
         run: |
-          echo "${VERSION}"
+          echo "${{ join(steps.git_version.outputs.*, '\n') }}"
