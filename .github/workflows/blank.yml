@@ -18,8 +18,9 @@ jobs:
           fetch-depth: 0
           
       - name: Run Docker Command
-        run: docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.6.11-alpine.3.12-x64-3.1 /repo
+        run: echo "::set-output name=git-version::$(docker run --rm -v "$(pwd):/repo" gittools/gitversion:5.6.11-alpine.3.12-x64-3.1 /repo)
+        id: git_version
           
       - name: Assign variables
         run: |
-          echo "${{ steps.gitversion.outputs.semVer }}"
+          echo "${{ steps.git_version.outputs.semVer }}"
