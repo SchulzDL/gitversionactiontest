@@ -19,6 +19,5 @@ jobs:
           
     - name: Assign variables
       run: |
-        echo "${{ $GitVersion_FullSemVer }}"
         echo "${{ semver }}"
         echo "${{ branchname }}"
