@@ -20,4 +20,4 @@ jobs:
           
     - name: Assign variables
       run: |
-        cat /github/workspace/version.txt
+        ls -a /home/runner/work
