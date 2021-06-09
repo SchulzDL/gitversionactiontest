@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Get Git Version
+      id: gitversion
       uses: docker://gittools/gitversion:5.6.11-alpine.3.12-x64-3.1
       env:
         SEMVER: $GitVersion_FullSemVer
@@ -17,5 +18,5 @@ jobs:
           
     - name: Assign variables
       run: |
-        echo "${SEMVER}"
-        echo "${BRANCHNAME}"
+        echo "${{ steps.gitversion.outputs.fullSemVer }}"
+        echo "${{ steps.gitversion.outputs.branchname }}"
