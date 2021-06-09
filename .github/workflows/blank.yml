@@ -16,5 +16,4 @@ jobs:
           
     - name: Assign variables
       run: |
-        ls -a /home/runner/work
-        echo $GitVersion_FullSemVer
+        echo "$GitVersion_FullSemVer"
