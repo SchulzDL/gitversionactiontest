@@ -20,4 +20,4 @@ jobs:
           
     - name: Assign variables
       run: |
-        ls -a /home/runner/work
+        ls -a /home/runner/work/gitversionactiontest
