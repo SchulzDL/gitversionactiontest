@@ -20,5 +20,4 @@ jobs:
           
     - name: Assign variables
       run: |
-        echo "${{ steps.gitversion.outputs.fullSemVer }}"
-        echo "${{ steps.gitversion.outputs.branchname }}"
+        cat /github/workspace/version.txt
