@@ -10,13 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Get Git Version
-      id: gitversion
       uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
       with:
-        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_SemVer > /github/workspace/version.txt\" \"echo $GitVersion_BranchName > /github/workspace/branch.txt\""
-      env:
-        SEMVER: $GitVersion_FullSemVer
-        BRANCHNAME: $GitVersion_BranchName
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_SemVer > /github/workspace/version.txt\""
+        
+    - name: Get Git Branch
+      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+      with:
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_BranchName > /github/workspace/branch.txt\""
           
     - name: Assign variables
       run: |
