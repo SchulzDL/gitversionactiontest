@@ -1,9 +1,0 @@
-mode: Mainline
-next-version: "2.2.3"
-branches:
-  feature:
-    tag: alpha
-  hotfix:
-    tag: beta
-  master:
-    tag: ''
