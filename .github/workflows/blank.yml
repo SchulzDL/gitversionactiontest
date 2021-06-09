@@ -21,3 +21,4 @@ jobs:
     - name: Assign variables
       run: |
         cat /home/runner/work/gitversionactiontest/gitversionactiontest/version.txt
+        cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
