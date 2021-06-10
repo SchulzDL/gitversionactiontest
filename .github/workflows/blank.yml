@@ -12,11 +12,11 @@ jobs:
 
     - run: GitVersion
     
-    - name: GitVersion
-      id: gitversion
-      uses: nmcc/actions-gitversion@v1
-      with:
-        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
+    #- name: GitVersion
+    #  id: gitversion
+    #  uses: nmcc/actions-gitversion@v1
+    #  with:
+    #    path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
                   
     - name: Assign variables
       run: |
