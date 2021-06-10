@@ -6,20 +6,35 @@ on: [push, pull_request]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Get Git Version
-      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+
+    #- run: GitVersion
+    
+    - name: GitVersion
+      id: gitversion
+      uses: nmcc/actions-gitversion@v1
       with:
-        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_SemVer > /github/workspace/version.txt\""
-        
-    - name: Get Git Branch
-      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
-      with:
-        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_BranchName > /github/workspace/branch.txt\""
-          
+        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
+                  
     - name: Assign variables
       run: |
-        cat /home/runner/work/gitversionactiontest/gitversionactiontest/version.txt
-        cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
+        echo "${{ steps.gitversion.outputs.SemVer }}"
+        echo "${{ steps.gitversion.outputs.BranchName }}"
+        #cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
+        
+    - name: "Calling the Jenkins Job"
+      run: curl -X POST -u "admin:11874832c8514a340f399e1573033e6dd5" "https://version.t3winc.com/job/Sandbox/job/GitVersionActionTest?semver=${{ steps.gitversion.outputs.SemVer }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
+        
+    #- name: "Trigger jenkins job"
+    #  uses: stigmelling/jenkins-action@v1
+    #  with:
+    #    jenkinsUrl: ${{ secrets.JENKINS_URL }}
+    #    token: ${{ secrets.JENKINS_TOKEN }}
+    #    username: "admin"
+    #    job: "job/Sandbox/job/GitVersionActionTest"
+    #    params: "{'semver': '${{ steps.gitversion.outputs.SemVer }}', 'branchname': '${{ steps.gitversion.outputs.BranchName }}' }"
+   
+    #- name: Get job status
+    #  run: echo "Job status is ${{ steps.job-build.outputs.job_status }}"
