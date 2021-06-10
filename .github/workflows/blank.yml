@@ -12,10 +12,9 @@ jobs:
 
     - run: GitVersion
     - run: |
-        ls /a/_actions
-        ls /a/_PipelineMapping
-        ls /a/_temp
-        ls /a/gitversionactiontest
+        ls /a/_actions/actions
+        ls /a/_PipelineMapping/SchulzDL
+        ls /a/gitversionactiontest/gitversionactiontest
     
     #- name: GitVersion
     #  id: gitversion
