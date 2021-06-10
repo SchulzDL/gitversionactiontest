@@ -17,12 +17,7 @@ jobs:
       uses: nmcc/actions-gitversion@v1
       with:
         path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
-        
-    - name: Create Release
-      uses: actions/create-release@v1
-      with:
-        tag_name: ${{ steps.gitversion.outputs.SemVer }}
-          
+                  
     - name: Assign variables
       run: |
         echo "${{ steps.gitversion.outputs.SemVer }}"
