@@ -25,12 +25,13 @@ jobs:
         #cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
         
     - name: "Trigger jenkins job"
-      uses: GoldenspearLLC/build-jenkins-job@master
+      uses: stigmellingjenkins-action@v1
       with:
-        jenkins-url: ${{ secrets.JENKINS_URL }}
-        jenkins-token: ${{ secrets.JENKINS_TOKEN }}
-        user: "admin"
-        job-path: "job/Sandbox/job/GitVersionActionTest"
-        job-params: "{'semver': '${{ steps.gitversion.outputs.SemVer }}', 'branchname': '${{ steps.gitversion.outputs.BranchName }}' }"
+        jenkinsUrl: ${{ secrets.JENKINS_URL }}
+        token: ${{ secrets.JENKINS_TOKEN }}
+        username: "admin"
+        job: "job/Sandbox/job/GitVersionActionTest"
+        params: "{'semver': '${{ steps.gitversion.outputs.SemVer }}', 'branchname': '${{ steps.gitversion.outputs.BranchName }}' }"
+   
     - name: Get job status
       run: echo "Job status is ${{ steps.job-build.outputs.job_status }}"
