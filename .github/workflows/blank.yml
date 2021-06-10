@@ -10,17 +10,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - run: GitVersion
-    - run: |
-        ls /a/_actions/actions
-        ls /a/_PipelineMapping/SchulzDL
-        ls /a/gitversionactiontest/gitversionactiontest
+    #- run: GitVersion
     
-    #- name: GitVersion
-    #  id: gitversion
-    #  uses: nmcc/actions-gitversion@v1
-    #  with:
-    #    path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
+    - name: GitVersion
+      id: gitversion
+      uses: nmcc/actions-gitversion@v1
+      with:
+        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
                   
     - name: Assign variables
       run: |
