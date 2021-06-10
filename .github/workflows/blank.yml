@@ -6,15 +6,10 @@ on: [push, pull_request]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '2.1.801'
-    - uses: actions/setup-gitversion@v1.0.0
-      with:
-        gitversion-version: 5.1.1
+
     - run: GitVersion
     
     - name: Check the directory
