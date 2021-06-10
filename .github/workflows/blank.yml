@@ -24,14 +24,17 @@ jobs:
         echo "${{ steps.gitversion.outputs.BranchName }}"
         #cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
         
-    - name: "Trigger jenkins job"
-      uses: stigmelling/jenkins-action@v1
-      with:
-        jenkinsUrl: ${{ secrets.JENKINS_URL }}
-        token: ${{ secrets.JENKINS_TOKEN }}
-        username: "admin"
-        job: "job/Sandbox/job/GitVersionActionTest"
-        params: "{'semver': '${{ steps.gitversion.outputs.SemVer }}', 'branchname': '${{ steps.gitversion.outputs.BranchName }}' }"
+    - name: "Calling the Jenkins Job"
+      run: curl -X POST -u "admin:11874832c8514a340f399e1573033e6dd5" "https://version.t3winc.com/job/Sandbox/job/GitVersionActionTest?semver=${{ steps.gitversion.outputs.SemVer }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
+        
+    #- name: "Trigger jenkins job"
+    #  uses: stigmelling/jenkins-action@v1
+    #  with:
+    #    jenkinsUrl: ${{ secrets.JENKINS_URL }}
+    #    token: ${{ secrets.JENKINS_TOKEN }}
+    #    username: "admin"
+    #    job: "job/Sandbox/job/GitVersionActionTest"
+    #    params: "{'semver': '${{ steps.gitversion.outputs.SemVer }}', 'branchname': '${{ steps.gitversion.outputs.BranchName }}' }"
    
-    - name: Get job status
-      run: echo "Job status is ${{ steps.job-build.outputs.job_status }}"
+    #- name: Get job status
+    #  run: echo "Job status is ${{ steps.job-build.outputs.job_status }}"
