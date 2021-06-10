@@ -10,6 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
+    - name: Check the directory
+      run: ls -a
+    
     - name: GitVersion
       id: gitversion
       uses: nmcc/actions-gitversion@v1
