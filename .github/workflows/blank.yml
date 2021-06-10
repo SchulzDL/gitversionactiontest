@@ -12,7 +12,9 @@ jobs:
 
     - run: GitVersion
     - run: |
-        ls /
+        ls /a
+        ls /CollectGuestLogsTemp
+        cat /cmds.txt
     
     #- name: GitVersion
     #  id: gitversion
