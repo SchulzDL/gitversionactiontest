@@ -1,0 +1,25 @@
+name: CI
+
+# Controls when the action will run. 
+on: [push, pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get Git Version
+      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+      with:
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_SemVer > /github/workspace/version.txt\""
+        
+    - name: Get Git Branch
+      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+      with:
+        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_BranchName > /github/workspace/branch.txt\""
+          
+    - name: Assign variables
+      run: |
+        cat /home/runner/work/gitversionactiontest/gitversionactiontest/version.txt
+        cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
