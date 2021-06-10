@@ -9,17 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Get Git Version
-      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+    
+    - name: GitVersion
+      id: gitversion
+      uses: nmcc/actions/gitversion@v1
       with:
-        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_SemVer > /github/workspace/version.txt\""
+        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
         
-    - name: Get Git Branch
-      uses: docker://mcasperson/gitversion:5.0.2-linux-centos-7-netcoreapp2.2
+    - name: Create Release
+      uses: actions/create-release@v1
       with:
-        args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_BranchName > /github/workspace/branch.txt\""
+        tag_name: ${{ steps.gitversion.outputs.SemVer }}
           
     - name: Assign variables
       run: |
-        cat /home/runner/work/gitversionactiontest/gitversionactiontest/version.txt
-        cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
+        echo "${{ steps.gitversion.outputs.SemVer }}"
+        echo "${{ steps.gitversion.outputs.BranchName }}"
+        #cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
