@@ -25,7 +25,8 @@ jobs:
         #cat /home/runner/work/gitversionactiontest/gitversionactiontest/branch.txt
         
     - name: "Calling the Jenkins Job"
-      run: curl -X POST -u "admin:11874832c8514a340f399e1573033e6dd5" "https://version.t3winc.com/job/Sandbox/job/GitVersionActionTest?semver=${{ steps.gitversion.outputs.SemVer }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
+      run: curl "https://jenkins.t3winc.com/buildByToken/buildWithParameters?job=Sandbox/GitVersionActionTest&token=some-secure-build-token&semver=${{ steps.gitversion.outputs.SemVer }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
+      
         
     #- name: "Trigger jenkins job"
     #  uses: stigmelling/jenkins-action@v1
